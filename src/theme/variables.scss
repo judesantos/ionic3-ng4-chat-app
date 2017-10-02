@@ -34,8 +34,8 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
+  primary:    #ebad3e,
+  secondary:  #9d9d9d,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
@@ -61,6 +61,15 @@ $colors: (
 // Windows only Sass variables can go here
 
 
+
+ion-card ion-row {
+  padding: 10px;
+  float: right;
+
+  div button:nth-of-type(1) {
+    margin-right: 10px;
+  }
+}
 
 
 // App Theme

@@ -1,26 +1,40 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+# Chat application using ionic3 with angular4 and Sass
 
-## How to use this template
+A ready to use chat project template using ionic3 with angular4 and sass.
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+The application features: login, messsage, channels, and profile modules.
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
 
-### With the Ionic CLI:
+## Getting Started:
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
+ ### Copy from source repo
 
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myBlank blank
-```
+ git clone https://github.com/judesantos/yourtechy-app.git myProject
 
-Then, to run it, cd into `myBlank` and run:
+ ### Go to the clone destination path
 
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
+ cd myProject
 
-Substitute ios for android if not on a Mac.
+ ### Install all dependencies listed in package.json
 
+ npm install
+
+
+ ### To run build and start the application
+
+ npm run ionic:serve
+
+
+ ### To run build only
+
+ npm run build
+
+ ### To clean previous build
+
+ npm run clean
+
+
+ ### To run linter
+
+
+ npm run lint
