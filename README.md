@@ -9,7 +9,7 @@ The application features: login, messsage, channels, and profile modules.
 
  ### Copy from source repo
 
- git clone https://github.com/judesantos/yourtechy-app.git myProject
+ git clone https://github.com/judesantos/ionic3-ng4-chat-app.git myProject
 
  ### Go to the clone destination path
 
