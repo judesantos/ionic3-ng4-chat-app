@@ -18,15 +18,4 @@ export class LoginPage {
   constructor(private navCtrl: NavController, private navParams: NavParams) {
   }
 
-  newUser() {
-    // navigate page to registration window
-    this.navCtrl.push('RegisterPage')
-  }
-
-  loginUser() {
-    // sets root page as the destination page.
-    // setRoot essentially disables back button from login to inbox, once user
-    // has successfully logged in.
-    this.navCtrl.setRoot('TabsPage')
-  }
 }

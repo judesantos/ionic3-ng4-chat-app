@@ -1,4 +1,7 @@
-// Ionic Variables and Theming. For more info, please see:
+img {
+  margin: 60px auto 0 auto;
+  display: block;
+}// Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
 // Font path is used to include ionicons,
@@ -59,18 +62,6 @@ $colors: (
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
-
-
-ion-card ion-row {
-  padding: 10px;
-  float: right;
-
-  div button:nth-of-type(1) {
-    margin-right: 10px;
-  }
-}
-
 
 // App Theme
 // --------------------------------------------------
