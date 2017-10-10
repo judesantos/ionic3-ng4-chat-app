@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
-import { ToastController, NavController } from 'ionic-angular';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { NavController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth'
 
 import { Account } from '../../models/account/account.interface'
+import { LoginResponse } from '../../models/login/login-response.interface'
+
 /**
  * Generated class for the LoginFormComponent component.
  *
@@ -16,11 +18,13 @@ import { Account } from '../../models/account/account.interface'
 export class LoginFormComponent {
 
   account = {} as Account;
+  @Output() loginStatus: EventEmitter<LoginResponse>
 
   constructor(
-    private toast: ToastController,
     private auth: AngularFireAuth,
-    private navCtrl: NavController) {
+    private navCtrl: NavController)
+  {
+      this.loginStatus = new EventEmitter<LoginResponse>()
   }
 
   newUser() {
@@ -29,11 +33,11 @@ export class LoginFormComponent {
   }
 
   async loginUser() {
-
     try{
-      console.log(this.account)
-      const result = await this.auth.auth.signInWithEmailAndPassword(this.account.email, this.account.password)
-      console.log(result)
+      const result: LoginResponse = {
+        result: await this.auth.auth.signInWithEmailAndPassword(this.account.email, this.account.password)
+      }
+      this.loginStatus.emit(result)
       // sets root page as the destination page.
       // setRoot essentially disables back button from login to inbox, once user
       // has successfully logged in.
@@ -42,10 +46,12 @@ export class LoginFormComponent {
     catch (e)
     {
       console.error(e)
-      this.toast.create({
-        message: e,
-        duration: 3000
-      }).present()
+
+      const error: LoginResponse = {
+        error: e
+      }
+
+      this.loginStatus.emit(error)
     }
   }
 

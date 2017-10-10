@@ -37,8 +37,6 @@ export class RegisterFormComponent {
         duration: 3000
       }).present()
 
-      console.log(result)
-
       this.navCtrl.setRoot('TabsPage')
 
     }
