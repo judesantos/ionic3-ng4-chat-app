@@ -1,7 +1,7 @@
-export interface LoginResponse {
+export interface AuthResponse {
   result?: {
     email?: string,
-    uid?: string
+    uid?: string,
   },
   error?: {
     code?: string,

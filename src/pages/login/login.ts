@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
-import { LoginResponse } from '../../models/login/login-response.interface'
+import { AuthResponse } from '../../models/auth/auth-response.interface'
 /**
  * Generated class for the LoginPage page.
  *
@@ -22,13 +22,13 @@ export class LoginPage {
   {
   }
 
-  loginEvent(event: LoginResponse) {
+  loginEvent(event: AuthResponse) {
     if (!event.error) {
       this.toast.create({
         message: `Welcome to yourtechy-app, ${event.result.email}`,
         duration: 3000
       }).present()
-      
+
       this.navCtrl.setRoot('ProfilePage')
     }
     else

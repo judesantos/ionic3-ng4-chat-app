@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth'
 
 import { Account } from '../../models/account/account.interface'
-import { LoginResponse } from '../../models/login/login-response.interface'
+import { AuthResponse } from '../../models/auth/auth-response.interface'
+import { AuthProvider } from '../../providers/auth/auth'
 
 /**
  * Generated class for the LoginFormComponent component.
@@ -18,13 +18,13 @@ import { LoginResponse } from '../../models/login/login-response.interface'
 export class LoginFormComponent {
 
   account = {} as Account;
-  @Output() loginStatus: EventEmitter<LoginResponse>
+  @Output() loginStatus: EventEmitter<AuthResponse>
 
   constructor(
-    private auth: AngularFireAuth,
+    private auth: AuthProvider,
     private navCtrl: NavController)
   {
-      this.loginStatus = new EventEmitter<LoginResponse>()
+      this.loginStatus = new EventEmitter<AuthResponse>()
   }
 
   newUser() {
@@ -33,26 +33,8 @@ export class LoginFormComponent {
   }
 
   async loginUser() {
-    try{
-      const result: LoginResponse = {
-        result: await this.auth.auth.signInWithEmailAndPassword(this.account.email, this.account.password)
-      }
-      this.loginStatus.emit(result)
-      // sets root page as the destination page.
-      // setRoot essentially disables back button from login to inbox, once user
-      // has successfully logged in.
-      this.navCtrl.setRoot('TabsPage')
-    }
-    catch (e)
-    {
-      console.error(e)
-
-      const error: LoginResponse = {
-        error: e
-      }
-
-      this.loginStatus.emit(error)
-    }
+    const result = await this.auth.signInWithEmailAndPassword(this.account)
+    this.loginStatus.emit(result)
   }
 
 }

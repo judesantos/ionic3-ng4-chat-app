@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth'
-import { ToastController, NavController } from 'ionic-angular'
+import { Component, EventEmitter, Output } from '@angular/core';
+import { NavController } from 'ionic-angular'
 
 import { Account } from '../../models/account/account.interface'
+import { AuthResponse } from '../../models/auth/auth-response.interface'
+import { AuthProvider } from '../../providers/auth/auth'
 
 /**
  * Generated class for the RegisterFormComponent component.
@@ -17,36 +18,19 @@ import { Account } from '../../models/account/account.interface'
 export class RegisterFormComponent {
 
   account = {} as Account
+  @Output() registerStatus: EventEmitter<AuthResponse>
 
   constructor(
     private navCtrl: NavController,
-    private toast: ToastController,
-    private auth: AngularFireAuth) {
+    private auth: AuthProvider)
+  {
+    this.registerStatus = new EventEmitter<AuthResponse>()
   }
 
 
   async register() {
 
-    try
-    {
-      const result = await this.auth.auth.createUserWithEmailAndPassword(
-        this.account.email, this.account.password)
-
-      this.toast.create({
-        message: 'Account successfully created.',
-        duration: 3000
-      }).present()
-
-      this.navCtrl.setRoot('TabsPage')
-
-    }
-    catch (e)
-    {
-      console.error(e)
-      this.toast.create({
-        message: e,
-        duration: 3000
-      }).present()
-    }
+    const result = await this.auth.createUserWithEmailAndPassword(this.account)
+    this.registerStatus.emit(result)
   }
 }
