@@ -1,23 +1,47 @@
-<ion-card>
+<form #registerForm="ngForm" novalidate>
+  <ion-card>
 
-  <ion-card-content>
+    <ion-card-content>
 
-    <ion-item>
-      <ion-label floating>Email Address</ion-label>
-      <ion-input type="email" [(ngModel)]="account.email"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label floating>Email Address</ion-label>
+        <ion-input
+          [(ngModel)]="account.email"
+          type="email"
+          name="email"
+          #email="ngModel"
+          required
+          [pattern]="rgxEmail">
+        </ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="account.password"></ion-input>
-    </ion-item>
+      <div class="error" padding *ngIf="email.invalid && email.dirty">
+        <span>Email address not valid.</span>
+      </div>
 
-  </ion-card-content>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input
+          [(ngModel)]="account.password"
+          type="password"
+          name="password"
+          #password="ngModel"
+          required
+          [pattern]="rgxPassword">
+        </ion-input>
+      </ion-item>
 
-  <ion-row class="register-button">
-    <div>
-      <button ion-button (click)="register()">Register</button>
-    </div>
-  </ion-row>
+      <div class="error" padding *ngIf="password.invalid && password.dirty">
+        <span>Password not valid.</span>
+      </div>
 
-</ion-card>
+    </ion-card-content>
+
+    <ion-row class="register-button">
+      <div>
+        <button ion-button (click)="register()" [disabled]="registerForm.invalid">Register</button>
+      </div>
+    </ion-row>
+
+  </ion-card>
+</form>

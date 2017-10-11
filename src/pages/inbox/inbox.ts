@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { MESSAGE_LIST } from '../../mocks/messages/messages'
-import { Message } from '../../models/messages/message.interface'      
+import { Message } from '../../models/messages/message.interface'
 
 
 /**

@@ -17,6 +17,10 @@ import { AuthProvider } from '../../providers/auth/auth'
 })
 export class LoginFormComponent {
 
+  rgxEmail: string = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+  // min 6 chars with allowed chars
+  rgxPassword: string = "[a-zA-Z0-9!@#$%^&*]{6,20}$"
+
   account = {} as Account;
   @Output() loginStatus: EventEmitter<AuthResponse>
 
