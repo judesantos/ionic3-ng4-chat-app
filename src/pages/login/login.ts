@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
+import { User } from 'firebase/app'
+
 import { AuthResponse } from '../../models/auth/auth-response.interface'
+import { DataProvider } from '../../providers/data/data'
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -17,6 +21,7 @@ import { AuthResponse } from '../../models/auth/auth-response.interface'
 export class LoginPage {
 
   constructor(
+    private data: DataProvider,
     private navCtrl: NavController,
     private toast: ToastController)
   {
@@ -29,7 +34,11 @@ export class LoginPage {
         duration: 3000
       }).present()
 
-      this.navCtrl.setRoot('ProfilePage')
+      this.data.getProfile(<User>event.result).subscribe(profile => {
+        console.log('getProfile returned')
+        console.log(profile)
+        profile ? this.navCtrl.setRoot('TabsPage') : this.navCtrl.setRoot('EditProfilePage')
+      })
     }
     else
     {

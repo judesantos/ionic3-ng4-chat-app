@@ -1,12 +1,12 @@
 import { Message } from '../../models/messages/message.interface'
-import { USER_LIST } from '../../mocks/users/users'
+import { PROFILE_LIST } from '../../mocks/profiles/profiles'
 
-const userList = USER_LIST
+const profileList = PROFILE_LIST
 
 const messageList: Message[] = []
 
-userList.forEach(user => {
-  messageList.push({user: user, message: 'A demo message...', date: new Date()})
+profileList.forEach(profile => {
+  messageList.push({profile: profile, message: 'A demo message...', date: new Date()})
 })
 
 

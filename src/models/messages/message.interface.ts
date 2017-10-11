@@ -1,7 +1,7 @@
-import { User } from '../user/user.interface'
+import { Profile } from '../../models/profile/profile.interface'
 
 export interface Message {
-  user: User;
+  profile: Profile;
   message: string;
   date: Date;
 }
