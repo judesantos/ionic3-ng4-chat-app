@@ -5,12 +5,7 @@ import { User } from 'firebase/app'
 import { Profile } from '../../models/profile/profile.interface'
 import { AuthProvider } from '../../providers/auth/auth'
 import { DataProvider } from '../../providers/data/data'
-/**
- * Generated class for the EditProfileFormComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+
 @Component({
   selector: 'edit-profile-form',
   templateUrl: 'edit-profile-form.html'

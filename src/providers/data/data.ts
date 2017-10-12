@@ -6,12 +6,9 @@ import { User } from "firebase/app";
 
 import { Profile } from '../../models/profile/profile.interface'
 
-/*
-  Generated class for the DataProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
+/**
+ * Class DataProvider. Firebase Database proxy service.
+ */
 @Injectable()
 export class DataProvider {
 
@@ -25,6 +22,9 @@ export class DataProvider {
   {
   }
 
+  /**
+   * Find a single user.
+   */
   searchUser(firstName: string|null)
   {
     this.firstName$ = new BehaviorSubject(null)
@@ -34,11 +34,17 @@ export class DataProvider {
     ).valueChanges()
   }
 
+  /**
+   * Find user profile based on firebase object Users' uid.
+   */
   getProfile(user: User) {
     this.profileObject = this.database.object(`/profiles/${user.uid}`)
     return this.profileObject.valueChanges()
   }
 
+  /**
+   * Update profile asynchronously.
+   */
   async saveProfile(user: User, profile: Profile) {
     this.profileObject = this.database.object(`/profiles/${user.uid}`);
 

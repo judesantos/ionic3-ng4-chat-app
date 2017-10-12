@@ -6,12 +6,6 @@ import { DataProvider } from '../../providers/data/data'
 import { AuthProvider } from '../../providers/auth/auth'
 import { Profile } from '../../models/profile/profile.interface'
 
-/**
- * Generated class for the ProfileComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'profile-view',
   templateUrl: 'profile.html'

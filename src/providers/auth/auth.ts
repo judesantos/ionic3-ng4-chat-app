@@ -4,22 +4,26 @@ import { AngularFireAuth } from 'angularfire2/auth'
 import { Account } from "../../models/account/account.interface"
 import { AuthResponse } from '../../models/auth/auth-response.interface'
 
-/*
-  Generated class for the AuthProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
+/**
+ * Class AuthProvider. Firebase authentication proxy service.
+ *
+ */
 @Injectable()
 export class AuthProvider {
 
   constructor(private auth: AngularFireAuth) {
   }
 
+  /**
+   * Check if session was previously authenticated, if not state === null.
+   */
   getAuthenticatedUser() {
     return this.auth.authState
   }
 
+  /*
+   * Login user using email and password
+   */
   async signInWithEmailAndPassword(account: Account) {
 
     try {
@@ -35,6 +39,9 @@ export class AuthProvider {
     }
   }
 
+  /*
+   * Register new user
+   */
   async createUserWithEmailAndPassword(account: Account) {
     try {
       return <AuthResponse> {
