@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription'
 import { User } from 'firebase/app'
 
@@ -15,17 +15,23 @@ import { DataProvider } from '../../providers/data/data'
   selector: 'edit-profile-form',
   templateUrl: 'edit-profile-form.html'
 })
-export class EditProfileFormComponent implements OnDestroy {
+export class EditProfileFormComponent implements OnInit, OnDestroy {
 
   private authenticatedUser$: Subscription
   private authenticatedUser: User
 
-  profile = {} as Profile
+  @Input() profile: Profile
 
   constructor(private auth: AuthProvider, private data: DataProvider) {
     this.authenticatedUser$ = this.auth.getAuthenticatedUser().subscribe((user: User) => {
       this.authenticatedUser = user
     })
+  }
+
+  ngOnInit(): void {
+    if (!this.profile) {
+      this.profile = {} as Profile
+    }
   }
 
   ngOnDestroy(): void {
