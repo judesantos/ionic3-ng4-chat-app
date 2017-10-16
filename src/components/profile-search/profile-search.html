@@ -1,8 +1,8 @@
 <ion-searchbar [(ngModel)]="query" (ionChange)="searchUser(query)"></ion-searchbar>
 
-<ion-list *ngIf="profileList.length">
+<ion-list *ngIf="profileList?.length">
 
-  <ion-item *ngFor="let profile of profileList">
+  <ion-item *ngFor="let profile of profileList" (click)="selectProfile(profile)">
     <ion-avatar item-left>
       <img src="assets/img/profile.png" alt="Avatar" />
     </ion-avatar>

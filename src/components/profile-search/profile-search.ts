@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 import { DataProvider } from '../../providers/data/data'
 import { Profile } from '../../models/profile/profile.interface'
@@ -12,9 +12,16 @@ export class ProfileSearchComponent {
   query: string;
   profileList: Profile[] = []
 
+  @Output() selectedProfile: EventEmitter<Profile>
+
   constructor(private data: DataProvider) {
+    this.selectedProfile = new EventEmitter<Profile>()
   }
 
+  selectProfile(profile: Profile) {
+    this.selectedProfile.emit(profile)
+  }
+  
   searchUser(query: string) {
 
     this.profileList = [] // clear previous resultset

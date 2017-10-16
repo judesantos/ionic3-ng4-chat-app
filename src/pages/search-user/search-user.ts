@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { Profile } from '../../models/profile/profile.interface'
+
 /**
  * class SearchUserPage.
  */
@@ -11,7 +13,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SearchUserPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private navCtrl: NavController, private navParams: NavParams) {
+  }
+
+  openChat(profile: Profile) {
+    this.navCtrl.push('MessagePage', {profile: profile})
   }
 
 }
