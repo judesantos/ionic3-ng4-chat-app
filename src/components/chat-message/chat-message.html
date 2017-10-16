@@ -1,0 +1,23 @@
+<ion-item class="message-right" *ngIf="chatIndex % 2 === 0; else left">
+  <ion-avatar item-right>
+    <img src="assets/img/person.png" alt="avatar"/>
+  </ion-avatar>
+  <h2>{{ chatMessage.profile.firstName }} {{ chatMessage.profile.lastName }}</h2>
+  <h3> {{ chatMessage.message }} - {{ chatMessage.date }}</h3>
+  <p>
+    Test Chat message
+  </p>
+</ion-item>
+
+<ng-template #left>
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="assets/img/person.png" alt="avatar"/>
+    </ion-avatar>
+    <h2>{{ chatMessage.profile.firstName }} {{ chatMessage.profile.lastName }}</h2>
+    <h3> {{ chatMessage.message }} - {{ chatMessage.date }}</h3>
+    <p>
+      Test Chat message
+    </p>
+  </ion-item>
+</ng-template>
