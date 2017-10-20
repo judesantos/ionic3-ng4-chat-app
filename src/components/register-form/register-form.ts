@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { NavController } from 'ionic-angular'
+// import { NavController } from 'ionic-angular'
 
 import { Account } from '../../models/account/account.interface'
 import { AuthResponse } from '../../models/auth/auth-response.interface'

@@ -1,5 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { LoadingController, Loading } from 'ionic-angular'
+import { Subscription } from 'rxjs/Subscription'
 import { User } from 'firebase/app'
 
 import { DataProvider } from '../../providers/data/data'
@@ -10,8 +11,10 @@ import { Profile } from '../../models/profile/profile.interface'
   selector: 'profile-view',
   templateUrl: 'profile.html'
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
+  private profile$: Subscription
+  private authUser$: Subscription
   public userProfile: Profile
   private loader: Loading
 
@@ -33,13 +36,25 @@ export class ProfileComponent implements OnInit {
 
     this.loader.present()
 
-    this.auth.getAuthenticatedUser().subscribe((user: User) => {
-      this.data.getProfile(user).subscribe((profile) => {
-        this.userProfile = <Profile> profile
-        this.existingProfile.emit(this.userProfile)
-        this.loader.dismiss()
-      })
+    this.authUser$ = this.auth.getAuthenticatedUser().subscribe((user: User) => {
+      if (user) {
+        this.profile$ = this.data.getProfile(user).subscribe((profile) => {
+          this.userProfile = <Profile> profile
+          this.existingProfile.emit(this.userProfile)
+          this.loader.dismiss()
+        })
+      }
     })
+
+  }
+
+  ngOnDestroy(): void {
+    if (this.authUser$) {
+      this.authUser$.unsubscribe()
+    }
+    if (this.profile$) {
+      this.profile$.unsubscribe()
+    }
   }
 
 }

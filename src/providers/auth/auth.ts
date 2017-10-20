@@ -21,6 +21,10 @@ export class AuthProvider {
     return this.auth.authState
   }
 
+  signOut() {
+    this.auth.auth.signOut()
+  }
+
   /*
    * Login user using email and password
    */

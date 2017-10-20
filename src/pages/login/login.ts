@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { Subscription } from 'rxjs/Subscription'
 
 import { User } from 'firebase/app'
 
@@ -11,7 +12,9 @@ import { DataProvider } from '../../providers/data/data'
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage {
+export class LoginPage implements OnDestroy {
+
+  profile$: Subscription
 
   constructor(
     private data: DataProvider,
@@ -21,15 +24,14 @@ export class LoginPage {
   }
 
   loginEvent(event: AuthResponse) {
+    console.log('login event called')
     if (!event.error) {
       this.toast.create({
         message: `Welcome to yourtechy-app, ${event.result.email}`,
         duration: 3000
       }).present()
 
-      this.data.getProfile(<User>event.result).subscribe(profile => {
-        console.log('getProfile returned')
-        console.log(profile)
+      this.profile$ = this.data.getProfile(<User>event.result).subscribe(profile => {
         profile ? this.navCtrl.setRoot('TabsPage') : this.navCtrl.setRoot('EditProfilePage')
       })
     }
@@ -39,6 +41,12 @@ export class LoginPage {
         message: event.error.message,
         duration: 3000
       }).present()
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.profile$) {
+      this.profile$.unsubscribe()
     }
   }
 }

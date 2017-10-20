@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { AuthProvider } from '../../providers/auth/auth'
 import { Profile } from '../../models/profile/profile.interface'
 
 @IonicPage()
@@ -12,7 +13,10 @@ export class ProfilePage {
 
   profile = {} as Profile
 
-  constructor(private navCtrl: NavController, private navParams: NavParams) {
+  constructor(
+    private auth: AuthProvider,
+    private navCtrl: NavController,
+    private navParams: NavParams) {
   }
 
   editProfile() {
@@ -21,5 +25,11 @@ export class ProfilePage {
 
   getExistingProfile(profile: Profile) {
     this.profile = profile
+  }
+
+  logout() {
+    this.navCtrl.push('LoginPage')
+    this.auth.signOut()
+    //this.navCtrl.setRoot('LoginPage')
   }
 }

@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription'
 
 import { DataProvider } from '../../providers/data/data'
 import { Profile } from '../../models/profile/profile.interface'
@@ -7,10 +8,11 @@ import { Profile } from '../../models/profile/profile.interface'
   selector: 'profile-search',
   templateUrl: 'profile-search.html'
 })
-export class ProfileSearchComponent {
+export class ProfileSearchComponent implements OnDestroy {
 
   query: string;
   profileList: Profile[] = []
+  searchUser$: Subscription
 
   @Output() selectedProfile: EventEmitter<Profile>
 
@@ -21,7 +23,7 @@ export class ProfileSearchComponent {
   selectProfile(profile: Profile) {
     this.selectedProfile.emit(profile)
   }
-  
+
   searchUser(query: string) {
 
     this.profileList = [] // clear previous resultset
@@ -29,9 +31,17 @@ export class ProfileSearchComponent {
 
     if (trimmed === query)
     {
-      this.data.searchUser(query).subscribe(profiles => {
-        this.profileList = <Profile[]>profiles
+      this.searchUser$ = this.data.searchUser(query).subscribe(profiles => {
+        if (profiles) {
+          this.profileList = <Profile[]>profiles
+        }
       })
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.searchUser$) {
+      this.searchUser$.unsubscribe()
     }
   }
 }

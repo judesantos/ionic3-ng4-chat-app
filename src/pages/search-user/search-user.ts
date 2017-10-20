@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 import { Profile } from '../../models/profile/profile.interface'
 
@@ -13,7 +13,7 @@ import { Profile } from '../../models/profile/profile.interface'
 })
 export class SearchUserPage {
 
-  constructor(private navCtrl: NavController, private navParams: NavParams) {
+  constructor(private navCtrl: NavController) {
   }
 
   openChat(profile: Profile) {

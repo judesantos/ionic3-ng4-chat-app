@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database'
 import { User } from "firebase/app";
@@ -12,9 +11,6 @@ import { Profile } from '../../models/profile/profile.interface'
 @Injectable()
 export class DataProvider {
 
-  // query objects
-  //items: Observable<AngularFireAction<DatabaseSnapshot>[]>
-  firstName$: BehaviorSubject<string|null>
   // profile object
   profileObject: AngularFireObject<Profile>
 
@@ -27,8 +23,6 @@ export class DataProvider {
    */
   searchUser(firstName: string|null)
   {
-    this.firstName$ = new BehaviorSubject(null)
-
     return this.database.list('/profiles', ref =>
       firstName ? ref.orderByChild('firstName').equalTo(firstName) : ref
     ).valueChanges()
@@ -54,6 +48,7 @@ export class DataProvider {
     }
     catch(e)
     {
+      console.log("saveProfile Exception")
       console.error(e)
       return false;
     }
