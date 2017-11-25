@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 // import { Subscription } from 'rxjs/Subscription'
-import { User } from 'firebase/app'
+// import { User } from 'firebase/app'
 
 import { Profile } from '../../models/profile/profile.interface'
 // import { AuthProvider } from '../../providers/auth/auth'
@@ -41,6 +41,6 @@ export class EditProfileFormComponent implements OnInit, OnDestroy {
       //this.profile.email = this.authenticatedUser.email
       // const result = await this.data.saveProfile(this.authenticatedUser, this.profile)
       // console.log(result)
-    }
+    // }
   }
 }

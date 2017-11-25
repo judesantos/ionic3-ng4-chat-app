@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
-import { Subscription } from 'rxjs/Subscription'
+// import { Subscription } from 'rxjs/Subscription'
 
-import { User } from 'firebase/app'
+// import { User } from 'firebase/app'
 
 import { AuthResponse } from '../../models/auth/auth-response.interface'
 // import { DataProvider } from '../../providers/data/data'
@@ -14,7 +14,7 @@ import { AuthResponse } from '../../models/auth/auth-response.interface'
 })
 export class LoginPage implements OnDestroy {
 
-  profile$: Subscription
+  // profile$: Subscription
 
   constructor(
     // private data: DataProvider,
@@ -46,8 +46,8 @@ export class LoginPage implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.profile$) {
-      this.profile$.unsubscribe()
-    }
+    // if (this.profile$) {
+    //   this.profile$.unsubscribe()
+    // }
   }
 }

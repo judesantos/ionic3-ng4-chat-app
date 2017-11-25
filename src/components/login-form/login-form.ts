@@ -31,7 +31,7 @@ export class LoginFormComponent {
   }
 
   async loginUser() {
-    const result =  {
+    const result =  <AuthResponse> {
       result: {
         email: 'jude.msantos@gmail.com',
         uid: '234234-ertert-4534534-3453',

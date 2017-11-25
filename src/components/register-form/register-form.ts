@@ -3,7 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 import { Account } from '../../models/account/account.interface'
 import { AuthResponse } from '../../models/auth/auth-response.interface'
-import { AuthProvider } from '../../providers/auth/auth'
+// import { AuthProvider } from '../../providers/auth/auth'
 
 @Component({
   selector: 'register-form',
@@ -20,7 +20,8 @@ export class RegisterFormComponent {
   @Output() registerStatus: EventEmitter<AuthResponse>
 
   constructor(
-    private auth: AuthProvider)
+    // private auth: AuthProvider
+  )
   {
     this.registerStatus = new EventEmitter<AuthResponse>()
   }
@@ -28,7 +29,12 @@ export class RegisterFormComponent {
 
   async register() {
 
-    const result = await this.auth.createUserWithEmailAndPassword(this.account)
+    const result = <AuthResponse> {
+        result: {
+          email: 'jude.msantos@gmail.com ',
+          uid: '8559-345345rsdtedt-4456456-32423-swer',
+        } 
+    }//await this.auth.createUserWithEmailAndPassword(this.account)
     this.registerStatus.emit(result)
   }
 }

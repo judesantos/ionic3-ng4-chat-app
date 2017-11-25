@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { LoadingController, Loading } from 'ionic-angular'
 // import { Subscription } from 'rxjs/Subscription'
-import { User } from 'firebase/app'
+// import { User } from 'firebase/app'
 
 // import { DataProvider } from '../../providers/data/data'
 // import { AuthProvider } from '../../providers/auth/auth'
