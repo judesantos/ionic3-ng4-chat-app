@@ -1,8 +1,10 @@
 import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription'
 
-import { DataProvider } from '../../providers/data/data'
+// import { DataProvider } from '../../providers/data/data'
 import { Profile } from '../../models/profile/profile.interface'
+
+import { PROFILE_LIST } from './../../mocks/profiles/profiles';
 
 @Component({
   selector: 'profile-search',
@@ -16,7 +18,8 @@ export class ProfileSearchComponent implements OnDestroy {
 
   @Output() selectedProfile: EventEmitter<Profile>
 
-  constructor(private data: DataProvider) {
+  constructor() {
+  // constructor(private data: DataProvider) {
     this.selectedProfile = new EventEmitter<Profile>()
   }
 
@@ -31,11 +34,11 @@ export class ProfileSearchComponent implements OnDestroy {
 
     if (trimmed === query)
     {
-      this.searchUser$ = this.data.searchUser(query).subscribe(profiles => {
-        if (profiles) {
-          this.profileList = <Profile[]>profiles
-        }
-      })
+      // this.searchUser$ = this.data.searchUser(query).subscribe(profiles => {
+      //   if (profiles) {
+          this.profileList = <Profile[]>PROFILE_LIST
+      //   }
+      // })
     }
   }
 

@@ -12,7 +12,7 @@ export class EditProfilePage {
 
   profile = {} as Profile
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private navCtrl: NavController, private navParams: NavParams) {
     this.profile = this.navParams.get('profile')
   }
 

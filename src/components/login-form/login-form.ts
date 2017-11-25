@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { Account } from '../../models/account/account.interface'
 import { AuthResponse } from '../../models/auth/auth-response.interface'
-import { AuthProvider } from '../../providers/auth/auth'
+// import { AuthProvider } from '../../providers/auth/auth'
 
 @Component({
   selector: 'login-form',
@@ -19,7 +19,7 @@ export class LoginFormComponent {
   @Output() loginStatus: EventEmitter<AuthResponse>
 
   constructor(
-    private auth: AuthProvider,
+    // private auth: AuthProvider,
     private navCtrl: NavController)
   {
       this.loginStatus = new EventEmitter<AuthResponse>()
@@ -31,7 +31,12 @@ export class LoginFormComponent {
   }
 
   async loginUser() {
-    const result = await this.auth.signInWithEmailAndPassword(this.account)
+    const result =  {
+      result: {
+        email: 'jude.msantos@gmail.com',
+        uid: '234234-ertert-4534534-3453',
+      }
+    } //await this.auth.signInWithEmailAndPassword(this.account)
     this.loginStatus.emit(result)
   }
 

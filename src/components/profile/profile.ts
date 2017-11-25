@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { LoadingController, Loading } from 'ionic-angular'
-import { Subscription } from 'rxjs/Subscription'
+// import { Subscription } from 'rxjs/Subscription'
 import { User } from 'firebase/app'
 
-import { DataProvider } from '../../providers/data/data'
-import { AuthProvider } from '../../providers/auth/auth'
+// import { DataProvider } from '../../providers/data/data'
+// import { AuthProvider } from '../../providers/auth/auth'
 import { Profile } from '../../models/profile/profile.interface'
 
 @Component({
@@ -13,8 +13,8 @@ import { Profile } from '../../models/profile/profile.interface'
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 
-  private profile$: Subscription
-  private authUser$: Subscription
+  // private profile$: Subscription
+  // private authUser$: Subscription
   public userProfile: Profile
   private loader: Loading
 
@@ -22,8 +22,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private loading: LoadingController,
-    private auth: AuthProvider,
-    private data: DataProvider)
+    // private auth: AuthProvider,
+    // private data: DataProvider
+  )
   {
     this.existingProfile = new EventEmitter<Profile>()
 
@@ -36,25 +37,32 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.loader.present()
 
-    this.authUser$ = this.auth.getAuthenticatedUser().subscribe((user: User) => {
-      if (user) {
-        this.profile$ = this.data.getProfile(user).subscribe((profile) => {
-          this.userProfile = <Profile> profile
+    // this.authUser$ = this.auth.getAuthenticatedUser().subscribe((user: User) => {
+    //   if (user) {
+    //     this.profile$ = this.data.getProfile(user).subscribe((profile) => {
+          this.userProfile = <Profile> {
+            firstName: 'Jude',
+            lastName: 'Santos',
+            avatar: 'assets/img/person.png',
+            email: 'jude@yourtechy.com',
+            dateOfBirth: new Date('11/07/80')
+          }
+
           this.existingProfile.emit(this.userProfile)
           this.loader.dismiss()
-        })
-      }
-    })
+    //     })
+    //   }
+    // })
 
   }
 
   ngOnDestroy(): void {
-    if (this.authUser$) {
-      this.authUser$.unsubscribe()
-    }
-    if (this.profile$) {
-      this.profile$.unsubscribe()
-    }
+    // if (this.authUser$) {
+    //   this.authUser$.unsubscribe()
+    // }
+    // if (this.profile$) {
+    //   this.profile$.unsubscribe()
+    // }
   }
 
 }
